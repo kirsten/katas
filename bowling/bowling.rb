@@ -8,7 +8,11 @@ class Game
   end
 
   def score
-    rolls.sum
+    if rolls.first(2).sum == 10
+      rolls.sum + rolls[2]
+    else
+      rolls.sum
+    end
   end
 
   private
