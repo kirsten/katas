@@ -9,14 +9,13 @@ class Game
 
   def score
     running_score = 0
-    frames = rolls.each_slice(2).to_a
-    frames.each.with_index do |frame, index|
-      if is_spare_frame?(frame)
-        running_score += frame.sum + frames[index + 1][0]
-      else
-        running_score += frame.sum
-      end
+
+    while rolls.any?
+      frame_score = is_spare_frame?(rolls.take(2)) ? rolls.take(3).sum : rolls.take(2).sum
+      running_score += frame_score
+      rolls.shift(2)
     end
+
     running_score
   end
 
