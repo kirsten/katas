@@ -8,7 +8,7 @@ class Game
   end
 
   def score
-    if rolls.first(2).sum == 10
+    if is_spare_frame?(rolls.first(2))
       rolls.sum + rolls[2]
     else
       rolls.sum
@@ -16,6 +16,10 @@ class Game
   end
 
   private
+
+  def is_spare_frame?(frame)
+    frame.sum == 10
+  end
 
   attr_reader :rolls
 end
