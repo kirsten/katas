@@ -32,7 +32,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_consecutive_spares_each_get_a_one_roll_bonus
-    skip
     game = Game.new
     rolls = [5, 5, 3, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     rolls.each { |pins| game.roll(pins) }

@@ -8,11 +8,16 @@ class Game
   end
 
   def score
-    if is_spare_frame?(rolls.first(2))
-      rolls.sum + rolls[2]
-    else
-      rolls.sum
+    running_score = 0
+    frames = rolls.each_slice(2).to_a
+    frames.each.with_index do |frame, index|
+      if is_spare_frame?(frame)
+        running_score += frame.sum + frames[index + 1][0]
+      else
+        running_score += frame.sum
+      end
     end
+    running_score
   end
 
   private
