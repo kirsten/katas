@@ -4,7 +4,6 @@ require_relative 'bowling'
 
 class BowlingTest < Minitest::Test
   def test_should_be_able_to_score_a_game_with_all_zeros
-    # skip
     game = Game.new
     rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     rolls.each { |pins| game.roll(pins) }
@@ -12,7 +11,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_should_be_able_to_score_a_game_with_no_strikes_or_spares
-    skip
     game = Game.new
     rolls = [3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6]
     rolls.each { |pins| game.roll(pins) }
