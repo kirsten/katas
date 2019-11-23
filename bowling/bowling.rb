@@ -1,13 +1,17 @@
 class Game
-  def initialize
-    @rolls = []
+  def initialize(rolls = [])
+    @rolls = rolls
   end
 
   def roll(pinfall)
-    @rolls << pinfall
+    self.class.new(rolls << pinfall)
   end
 
   def score
-    @rolls.sum
+    rolls.sum
   end
+
+  private
+
+  attr_reader :rolls
 end
