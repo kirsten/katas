@@ -18,7 +18,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_a_spare_followed_by_zeros_is_worth_ten_points
-    skip
     game = Game.new
     rolls = [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     rolls.each { |pins| game.roll(pins) }
