@@ -8,32 +8,32 @@ class Game
   end
 
   def score
-    running_score = 0
-    frame_number = 1
-
-    while rolls.any?
-      frame_score = 0
-      if frame_number == 10
-        frame_score += rolls.sum
-        rolls.shift(rolls.length)
-      elsif rolls.first == 10
-        frame_score += rolls.take(3).sum
-        rolls.shift(1)
-      elsif rolls.take(2).sum == 10
-        frame_score += rolls.take(3).sum
-        rolls.shift(2)
-      else
-        frame_score += rolls.take(2).sum
-        rolls.shift(2)
-      end
-      running_score += frame_score
-      frame_number += 1
-    end
-
-    running_score
+    score_frames(rolls)
   end
 
   private
+
+  def score_frames(rolls = [], frame_number = 1, score = 0)
+    return score if rolls.empty?
+
+    if frame_number == 10
+      frame_score = rolls.sum
+      rolls.shift(rolls.length)
+      score_frames(rolls, frame_number, score + frame_score)
+    elsif rolls.first == 10
+      frame_score = rolls.take(3).sum
+      rolls.shift(1)
+      score_frames(rolls, frame_number + 1, score + frame_score)
+    elsif rolls.take(2).sum == 10
+      frame_score = rolls.take(3).sum
+      rolls.shift(2)
+      score_frames(rolls, frame_number + 1, score + frame_score)
+    else
+      frame_score = rolls.take(2).sum
+      rolls.shift(2)
+      score_frames(rolls, frame_number + 1, score + frame_score)
+    end
+  end
 
   attr_reader :rolls
 end
