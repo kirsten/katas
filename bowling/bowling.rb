@@ -18,7 +18,7 @@ class Game
 
     if frame_number == 10
       score_frames(rolls.drop(rolls.length), frame_number, score + rolls.sum)
-    elsif rolls.first == 10
+    elsif rolls.take(1).sum == 10
       score_frames(rolls.drop(1), frame_number + 1, score + rolls.take(3).sum)
     elsif rolls.take(2).sum == 10
       score_frames(rolls.drop(2), frame_number + 1, score + rolls.take(3).sum)
