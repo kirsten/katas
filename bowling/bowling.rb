@@ -18,20 +18,16 @@ class Game
 
     if frame_number == 10
       frame_score = rolls.sum
-      rolls.shift(rolls.length)
-      score_frames(rolls, frame_number, score + frame_score)
+      score_frames(rolls.drop(rolls.length), frame_number, score + frame_score)
     elsif rolls.first == 10
       frame_score = rolls.take(3).sum
-      rolls.shift(1)
-      score_frames(rolls, frame_number + 1, score + frame_score)
+      score_frames(rolls.drop(1), frame_number + 1, score + frame_score)
     elsif rolls.take(2).sum == 10
       frame_score = rolls.take(3).sum
-      rolls.shift(2)
-      score_frames(rolls, frame_number + 1, score + frame_score)
+      score_frames(rolls.drop(2), frame_number + 1, score + frame_score)
     else
       frame_score = rolls.take(2).sum
-      rolls.shift(2)
-      score_frames(rolls, frame_number + 1, score + frame_score)
+      score_frames(rolls.drop(2), frame_number + 1, score + frame_score)
     end
   end
 
