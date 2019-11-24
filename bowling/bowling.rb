@@ -19,7 +19,7 @@ class Game
       elsif rolls.first == 10
         frame_score += rolls.take(3).sum
         rolls.shift(1)
-      elsif is_spare_frame?(rolls.take(2))
+      elsif rolls.take(2).sum == 10
         frame_score += rolls.take(3).sum
         rolls.shift(2)
       else
@@ -34,10 +34,6 @@ class Game
   end
 
   private
-
-  def is_spare_frame?(frame)
-    frame.sum == 10
-  end
 
   attr_reader :rolls
 end
