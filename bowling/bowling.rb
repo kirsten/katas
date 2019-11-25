@@ -17,13 +17,23 @@ class Game
     return score if rolls.empty?
 
     if frame_number == 10
-      score_frames(rolls.drop(3), frame_number + 0, score + rolls.take(3).sum)
+      score_frames(rolls.drop(num_rolls_in_frame(rolls, frame_number)), frame_number + 0, score + rolls.take(3).sum)
     elsif rolls.take(1).sum == 10
-      score_frames(rolls.drop(1), frame_number + 1, score + rolls.take(3).sum)
+      score_frames(rolls.drop(num_rolls_in_frame(rolls, frame_number)), frame_number + 1, score + rolls.take(3).sum)
     elsif rolls.take(2).sum == 10
-      score_frames(rolls.drop(2), frame_number + 1, score + rolls.take(3).sum)
+      score_frames(rolls.drop(num_rolls_in_frame(rolls, frame_number)), frame_number + 1, score + rolls.take(3).sum)
     else
-      score_frames(rolls.drop(2), frame_number + 1, score + rolls.take(2).sum)
+      score_frames(rolls.drop(num_rolls_in_frame(rolls, frame_number)), frame_number + 1, score + rolls.take(2).sum)
+    end
+  end
+
+  def num_rolls_in_frame(rolls, frame_number)
+    if frame_number == 10
+      3
+    elsif rolls.take(1).sum == 10
+      1
+    else
+      2
     end
   end
 
