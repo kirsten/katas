@@ -6,7 +6,7 @@ class Game
   end
 
   def roll(pinfall)
-    raise BowlingError if pinfall < 0 || pinfall > 10
+    validate_pinfall(pinfall)
 
     self.class.new(rolls << pinfall)
   end
@@ -16,6 +16,10 @@ class Game
   end
 
   private
+
+  def validate_pinfall(pinfall)
+    raise BowlingError if pinfall < 0 || pinfall > 10
+  end
 
   def score_frames(rolls = [], frame_number = 1, score = 0)
     return score if rolls.empty?
