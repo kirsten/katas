@@ -6,7 +6,7 @@ class Game
   end
 
   def roll(pinfall)
-    raise BowlingError if pinfall < 0
+    raise BowlingError if pinfall < 0 || pinfall > 10
 
     self.class.new(rolls << pinfall)
   end
