@@ -1,9 +1,13 @@
 class Game
+  class BowlingError < StandardError; end
+
   def initialize(rolls = [])
     @rolls = rolls
   end
 
   def roll(pinfall)
+    raise BowlingError if pinfall < 0
+
     self.class.new(rolls << pinfall)
   end
 
