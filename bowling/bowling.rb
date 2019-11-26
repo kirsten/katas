@@ -18,7 +18,7 @@ class Game
   private
 
   def validate_pinfall(pinfall)
-    raise BowlingError if pinfall < 0 || pinfall > 10
+    raise BowlingError unless pinfall.between?(0, 10)
   end
 
   def score_frames(rolls = [], frame_number = 1, score = 0)
