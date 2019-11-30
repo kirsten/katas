@@ -1,15 +1,16 @@
 class Game
   class BowlingError < StandardError; end
 
-  def initialize(rolls = [], frames = [])
+  def initialize(rolls = [])
     @rolls = rolls
-    @frames = frames
   end
 
   def roll(pinfall)
     validate_pinfall(pinfall)
 
-    self.class.new(rolls << pinfall, create_frames(rolls))
+    rolls << pinfall
+
+    @frames = create_frames(rolls)
   end
 
   def score
