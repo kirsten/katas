@@ -26,12 +26,17 @@ class Game
   end
 
   def score_frames(rolls = [], frame_number = 1, score = 0)
-    return score if rolls.empty?
+    frames = create_frames(rolls)
+    frames.flatten.sum
+  end
 
-    score_frames(
+  def create_frames(rolls = [], frames = [], frame_number = 1)
+    return frames if rolls.empty?
+
+    create_frames(
       rolls.drop(num_rolls_in_frame(rolls, frame_number)),
-      frame_number + 1,
-      score + rolls.take(num_rolls_to_score_frame(rolls, frame_number)).sum
+      frames << rolls.take(num_rolls_to_score_frame(rolls, frame_number)),
+      frame_number + 1
     )
   end
 
