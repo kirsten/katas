@@ -14,21 +14,20 @@ class Game
   end
 
   def score
-    score_frames(rolls)
+    score_frames
   end
 
   private
 
   MAX_PINS = 10
 
-  attr_reader :rolls
+  attr_reader :rolls, :frames
 
   def validate_pinfall(pinfall)
     raise BowlingError unless pinfall.between?(0, MAX_PINS)
   end
 
-  def score_frames(rolls = [])
-    frames = create_frames(rolls)
+  def score_frames
     frames.flatten.sum
   end
 
