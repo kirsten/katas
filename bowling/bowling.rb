@@ -17,6 +17,8 @@ class Game
 
   private
 
+  attr_reader :rolls
+
   def validate_pinfall(pinfall)
     raise BowlingError unless pinfall.between?(0, 10)
   end
@@ -32,7 +34,7 @@ class Game
   end
 
   def num_rolls_in_frame(rolls, frame_number)
-    if frame_number == 10
+    if final_frame?(frame_number)
       3
     elsif rolls.take(1).sum == 10
       1
@@ -42,7 +44,7 @@ class Game
   end
 
   def num_rolls_to_score_frame(rolls, frame_number)
-    if frame_number == 10
+    if final_frame?(frame_number)
       3
     elsif rolls.take(1).sum == 10
       3
@@ -51,8 +53,9 @@ class Game
     else
       2
     end
-
   end
 
-  attr_reader :rolls
+  def final_frame?(frame_number)
+    frame_number == 10
+  end
 end
