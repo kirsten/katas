@@ -25,7 +25,7 @@ class Game
     raise BowlingError unless pinfall.between?(0, MAX_PINS)
   end
 
-  def score_frames(rolls = [], frame_number = 1, score = 0)
+  def score_frames(rolls = [])
     frames = create_frames(rolls)
     frames.flatten.sum
   end
