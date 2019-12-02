@@ -29,13 +29,7 @@ class Game
 
   def score_frames
     frames.each.with_index.reduce(0) do |score, (frame, index)|
-      if frame.length == 1 && frame.sum == MAX_PINS
-        score += frames.slice(index, frames.length).flatten.take(num_rolls_to_score_frame(frame, index)).sum
-      elsif frame.length == 2 && frame.sum == MAX_PINS
-        score += frames.slice(index, frames.length).flatten.take(num_rolls_to_score_frame(frame, index)).sum
-      else
-        score += frames.slice(index, frames.length).flatten.take(num_rolls_to_score_frame(frame, index)).sum
-      end
+      score += frames.slice(index, frames.length).flatten.take(num_rolls_to_score_frame(frame, index + 1)).sum
     end
   end
 
@@ -65,12 +59,12 @@ class Game
     end
   end
 
-  def num_rolls_to_score_frame(rolls, frame_number)
+  def num_rolls_to_score_frame(frame, frame_number)
     if final_frame?(frame_number)
       3
-    elsif rolls.take(1).sum == MAX_PINS
+    elsif frame.length == 1 && frame.sum == MAX_PINS
       3
-    elsif rolls.take(2).sum == MAX_PINS
+    elsif frame.length == 2 && frame.sum == MAX_PINS
       3
     else
       2
