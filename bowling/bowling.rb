@@ -29,9 +29,11 @@ class Game
 
   def score_frames
     frames.each.with_index.reduce(0) do |score, (frame, index)|
-      all_remaining_rolls = frames.slice(index, frames.length).flatten
+      all_remaining_rolls = frames.slice(index + 1, frames.length).flatten
       frame_number = index + 1
-      score += all_remaining_rolls.take(num_rolls_to_score_frame(frame, frame_number)).sum
+      frame_score = frame.sum
+      bonus_rolls = all_remaining_rolls.take(num_bonus_rolls_to_score_frame(frame, frame_number)).sum
+      score += frame_score + bonus_rolls
     end
   end
 
@@ -70,6 +72,18 @@ class Game
       3
     else
       2
+    end
+  end
+
+  def num_bonus_rolls_to_score_frame(frame, frame_number)
+    if final_frame?(frame_number)
+      0
+    elsif frame.length == 1 && frame.sum == MAX_PINS
+      2
+    elsif frame.length == 2 && frame.sum == MAX_PINS
+      1
+    else
+      0
     end
   end
 
