@@ -30,11 +30,11 @@ class Game
   def score_frames
     frames.each.with_index.reduce(0) do |score, (frame, index)|
       if frame.length == 1 && frame.sum == MAX_PINS
-        score += frame.sum + frames.slice(index + 1, frames.length).flatten.take(2).sum
+        score += frames.slice(index, frames.length).flatten.take(num_rolls_to_score_frame(frame, index)).sum
       elsif frame.length == 2 && frame.sum == MAX_PINS
-        score += frame.sum + frames.slice(index + 1, frames.length).flatten.take(1).sum
+        score += frames.slice(index, frames.length).flatten.take(num_rolls_to_score_frame(frame, index)).sum
       else
-        score += frame.sum
+        score += frames.slice(index, frames.length).flatten.take(num_rolls_to_score_frame(frame, index)).sum
       end
     end
   end
