@@ -29,7 +29,9 @@ class Game
 
   def score_frames
     frames.each.with_index.reduce(0) do |score, (frame, index)|
-      score += frames.slice(index, frames.length).flatten.take(num_rolls_to_score_frame(frame, index + 1)).sum
+      all_remaining_rolls = frames.slice(index, frames.length).flatten
+      frame_number = index + 1
+      score += all_remaining_rolls.take(num_rolls_to_score_frame(frame, frame_number)).sum
     end
   end
 
