@@ -62,18 +62,6 @@ class Game
     end
   end
 
-  def num_rolls_to_score_frame(frame, frame_number)
-    if final_frame?(frame_number)
-      3
-    elsif frame.length == 1 && frame.sum == MAX_PINS
-      3
-    elsif frame.length == 2 && frame.sum == MAX_PINS
-      3
-    else
-      2
-    end
-  end
-
   def num_bonus_rolls_to_score_frame(frame)
     if frame.length == 1 && frame.sum == MAX_PINS
       2
