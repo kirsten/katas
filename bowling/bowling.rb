@@ -28,8 +28,7 @@ class Game
   end
 
   def score_frames
-    score = 0
-    frames.each.with_index do |frame, index|
+    frames.each.with_index.reduce(0) do |score, (frame, index)|
       if frame.length == 1 && frame.sum == 10
         score += frame.sum + frames.slice(index + 1, frames.length).flatten.take(2).sum
       elsif frame.length == 2 && frame.sum == 10
@@ -38,7 +37,6 @@ class Game
         score += frame.sum
       end
     end
-    score
   end
 
   def create_frames(rolls = [], frames = [], frame_number = 1)
