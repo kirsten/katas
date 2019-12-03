@@ -32,7 +32,7 @@ class Game
   end
 
   def create_frames(rolls = [], frames = [], frame_number = 1)
-    return frames if rolls.empty?
+    return frames if frame_number > 10
 
     create_frames(
       rolls.drop(num_rolls_in_frame(rolls, frame_number)),
@@ -54,9 +54,7 @@ class Game
   end
 
   def num_rolls_in_frame(rolls, frame_number)
-    if final_frame?(frame_number)
-      3
-    elsif strike_frame?(rolls)
+    if strike_frame?(rolls)
       1
     elsif spare_frame?(rolls)
       2
@@ -66,9 +64,7 @@ class Game
   end
 
   def num_rolls_to_score_frame(rolls, frame_number)
-    if final_frame?(frame_number)
-      3
-    elsif strike_frame?(rolls)
+    if strike_frame?(rolls)
       3
     elsif spare_frame?(rolls)
       3
