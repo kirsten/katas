@@ -36,12 +36,12 @@ class Game
 
     create_frames(
       rolls.drop(num_rolls_in_frame(rolls)),
-      frames << create_frame(rolls, frame_number),
+      frames << create_frame(rolls),
       frame_number + 1
     )
   end
 
-  def create_frame(rolls, frame_number)
+  def create_frame(rolls)
     if frame_is_scorable?(rolls) && strike_frame?(rolls) && !strike_frame?(rolls.last(2)) && rolls.last(2).sum > MAX_PINS
       raise BowlingError
     end
