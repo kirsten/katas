@@ -56,7 +56,7 @@ class Game
   def num_rolls_in_frame(rolls, frame_number)
     if final_frame?(frame_number)
       3
-    elsif rolls.take(1).sum == MAX_PINS
+    elsif strike_frame?(rolls)
       1
     elsif rolls.take(2).sum == MAX_PINS
       2
@@ -68,7 +68,7 @@ class Game
   def num_rolls_to_score_frame(rolls, frame_number)
     if final_frame?(frame_number)
       3
-    elsif rolls.take(1).sum == MAX_PINS
+    elsif strike_frame?(rolls)
       3
     elsif rolls.take(2).sum == MAX_PINS
       3
@@ -79,6 +79,10 @@ class Game
 
   def frame_is_scorable?(rolls, frame_number)
     rolls.length == num_rolls_to_score_frame(rolls, frame_number)
+  end
+
+  def strike_frame?(rolls)
+    rolls.take(1).sum == MAX_PINS
   end
 
   def final_frame?(frame_number)
