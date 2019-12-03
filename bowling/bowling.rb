@@ -34,6 +34,10 @@ class Game
   def create_frames(rolls = [], frames = [], frame_number = 1)
     return frames if rolls.empty?
 
+    if final_frame?(frame_number) && frame_is_scorable?(rolls, frame_number) && rolls.first == MAX_PINS && rolls[1] != MAX_PINS && rolls.last(2).sum > 10
+      raise BowlingError
+    end
+
     if rolls.first != MAX_PINS && rolls.take(2).sum > MAX_PINS
       raise BowlingError
     end
@@ -67,6 +71,10 @@ class Game
     else
       2
     end
+  end
+
+  def frame_is_scorable?(rolls, frame_number)
+    rolls.length == num_rolls_to_score_frame(rolls, frame_number)
   end
 
   def final_frame?(frame_number)

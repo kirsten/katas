@@ -129,7 +129,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_bonus_roll_after_a_strike_in_the_last_frame_cannot_score_more_than_10_points
-    skip
     game = Game.new
     rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]
     rolls.each { |pins| game.roll(pins) }
@@ -139,7 +138,6 @@ class BowlingTest < Minitest::Test
   end
 
   def test_two_bonus_rolls_after_a_strike_in_the_last_frame_cannot_score_more_than_10_points
-    skip
     game = Game.new
     rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 5]
     rolls.each { |pins| game.roll(pins) }
