@@ -58,7 +58,7 @@ class Game
       3
     elsif strike_frame?(rolls)
       1
-    elsif rolls.take(2).sum == MAX_PINS
+    elsif spare_frame?(rolls)
       2
     else
       2
@@ -70,7 +70,7 @@ class Game
       3
     elsif strike_frame?(rolls)
       3
-    elsif rolls.take(2).sum == MAX_PINS
+    elsif spare_frame?(rolls)
       3
     else
       2
@@ -83,6 +83,10 @@ class Game
 
   def strike_frame?(rolls)
     rolls.take(1).sum == MAX_PINS
+  end
+
+  def spare_frame?(rolls)
+    rolls.take(2).sum == MAX_PINS
   end
 
   def final_frame?(frame_number)
