@@ -35,14 +35,14 @@ class Game
     return frames if frame_number > 10
 
     create_frames(
-      rolls.drop(num_rolls_in_frame(rolls, frame_number)),
+      rolls.drop(num_rolls_in_frame(rolls)),
       frames << create_frame(rolls, frame_number),
       frame_number + 1
     )
   end
 
   def create_frame(rolls, frame_number)
-    if final_frame?(frame_number) && frame_is_scorable?(rolls, frame_number) && strike_frame?(rolls) && !strike_frame?(rolls.last(2)) && rolls.last(2).sum > MAX_PINS
+    if final_frame?(frame_number) && frame_is_scorable?(rolls) && strike_frame?(rolls) && !strike_frame?(rolls.last(2)) && rolls.last(2).sum > MAX_PINS
       raise BowlingError
     end
 
@@ -50,10 +50,10 @@ class Game
       raise BowlingError
     end
 
-    rolls.take(num_rolls_to_score_frame(rolls, frame_number))
+    rolls.take(num_rolls_to_score_frame(rolls))
   end
 
-  def num_rolls_in_frame(rolls, frame_number)
+  def num_rolls_in_frame(rolls)
     if strike_frame?(rolls)
       1
     elsif spare_frame?(rolls)
@@ -63,7 +63,7 @@ class Game
     end
   end
 
-  def num_rolls_to_score_frame(rolls, frame_number)
+  def num_rolls_to_score_frame(rolls)
     if strike_frame?(rolls)
       3
     elsif spare_frame?(rolls)
@@ -73,8 +73,8 @@ class Game
     end
   end
 
-  def frame_is_scorable?(rolls, frame_number)
-    rolls.length == num_rolls_to_score_frame(rolls, frame_number)
+  def frame_is_scorable?(rolls)
+    rolls.length == num_rolls_to_score_frame(rolls)
   end
 
   def strike_frame?(rolls)
