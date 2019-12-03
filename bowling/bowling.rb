@@ -23,10 +23,6 @@ class Game
 
   attr_reader :rolls, :frames
 
-  def validate_pinfall(pinfall)
-    raise BowlingError unless pinfall.between?(0, MAX_PINS)
-  end
-
   def score_frames
     frames.flatten.sum
   end
@@ -42,13 +38,7 @@ class Game
   end
 
   def create_frame(rolls)
-    if frame_is_scorable?(rolls) && strike_frame?(rolls) && !strike_frame?(rolls.last(2)) && rolls.last(2).sum > MAX_PINS
-      raise BowlingError
-    end
-
-    if !strike_frame?(rolls) && rolls.take(2).sum > MAX_PINS
-      raise BowlingError
-    end
+    validate_frame_does_not_exceed_max_pinfall(rolls)
 
     rolls.take(num_rolls_to_score_frame(rolls))
   end
@@ -83,5 +73,19 @@ class Game
 
   def spare_frame?(rolls)
     rolls.take(2).sum == MAX_PINS
+  end
+
+  def validate_pinfall(pinfall)
+    raise BowlingError unless pinfall.between?(0, MAX_PINS)
+  end
+
+  def validate_frame_does_not_exceed_max_pinfall(rolls)
+    if frame_is_scorable?(rolls) && strike_frame?(rolls) && !strike_frame?(rolls.last(2)) && rolls.last(2).sum > MAX_PINS
+      raise BowlingError
+    end
+
+    if !strike_frame?(rolls) && rolls.take(2).sum > MAX_PINS
+      raise BowlingError
+    end
   end
 end
